@@ -6,6 +6,8 @@ A plugin pair for [Hermes Agent](https://hermes-agent.nousresearch.com) that bri
 
 It is a port of the Agency Agents plugin from DeepSeek Harness ([`@michengai/dsh-agency-agents`](https://github.com/MichengAI/dsh-agency-agents) v1.0.8). The personas come from [msitarzewski/agency-agents](https://github.com/msitarzewski/agency-agents).
 
+> 🙏 **Built on the shoulders of open source.** All 321 experts come from **[The Agency — msitarzewski/agency-agents](https://github.com/msitarzewski/agency-agents)** by Michael Sitarzewski and contributors. Every avatar is drawn with the open-source **[DiceBear](https://github.com/dicebear/dicebear)** avatar library and Lisa Wischofsky's **[Lorelei](https://www.dicebear.com/styles/lorelei/)** illustration collection. Thank you! See [Acknowledgements](#acknowledgements).
+
 <p align="center">
   <img src="avatars/chief-executive-officer.svg" width="56" title="Chief Executive Officer">
   <img src="avatars/engineering-software-architect.svg" width="56" title="Software Architect">
@@ -41,7 +43,8 @@ It is a port of the Agency Agents plugin from DeepSeek Harness ([`@michengai/dsh
 10. [Checks](#checks)
 11. [Repository layout](#repository-layout)
 12. [Troubleshooting](#troubleshooting)
-13. [Credits and licenses](#credits-and-licenses)
+13. [Acknowledgements](#acknowledgements)
+14. [Credits and licenses](#credits-and-licenses)
 
 ---
 
@@ -357,6 +360,18 @@ hermes-agency-agents/
 | A custom expert has no avatar | You are offline (custom avatars come from the DiceBear API). The emoji fallback is shown. |
 | Saving shows "must create a unique slug/id" | Another expert or team already produces that slug. Rename yours. |
 | `agency_agents_delegate` returns a `prompt` instead of a `result` | Subagents are not available in this Hermes runtime. The model continues with the persona prompt. |
+
+---
+
+## Acknowledgements
+
+This project could not exist without the people below. Thank you for sharing your work openly.
+
+- **[The Agency — msitarzewski/agency-agents](https://github.com/msitarzewski/agency-agents).** Thanks to **Michael Sitarzewski** and every contributor for writing and maintaining the expert personas. They are the heart of this plugin: every expert you load in Hermes is their work. If this is useful to you, please ⭐ star the original repo.
+- **[MichengAI/dsh-agency-agents](https://github.com/MichengAI/dsh-agency-agents).** Thanks to the authors of the DeepSeek Harness plugin. Its expert-team design and UX are what this Hermes version is based on.
+- **[DiceBear](https://github.com/dicebear/dicebear).** Thanks to **Florian Körner** and the DiceBear contributors for this open-source avatar library and its free HTTP API.
+- **[Lorelei illustration collection](https://www.figma.com/community/file/1198749693280469639)** by **[Lisa Wischofsky](https://www.instagram.com/lischi_art/)**. Thanks for releasing these character illustrations under CC0. Every expert's face comes from this collection.
+- **[Hermes Agent](https://hermes-agent.nousresearch.com)** by Nous Research, for a plugin system open enough to make this possible.
 
 ---
 

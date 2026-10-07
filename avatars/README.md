@@ -1,6 +1,6 @@
 # Expert avatars (321)
 
-DiceBear Lorelei (CC0 1.0), seed = expert slug.
+Drawn with [DiceBear](https://github.com/dicebear/dicebear) (MIT) using the [Lorelei](https://www.figma.com/community/file/1198749693280469639) illustration collection by Lisa Wischofsky (CC0 1.0), seed = expert slug. Experts from [msitarzewski/agency-agents](https://github.com/msitarzewski/agency-agents). Thank you! 🙏
 
 <img src="academic-anthropologist.svg" width="64" title="Anthropologist" alt="Anthropologist">
 <img src="academic-geographer.svg" width="64" title="Geographer" alt="Geographer">

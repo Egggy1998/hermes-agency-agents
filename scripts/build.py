@@ -39,7 +39,7 @@ def load_avatars(agents: list[dict[str, str]]) -> dict[str, str]:
     with ThreadPoolExecutor(8) as pool:
         list(pool.map(fetch_avatar, [a["slug"] for a in agents]))
     (AVATARS / "README.md").write_text(
-        f"# Expert avatars ({len(agents)})\n\nDiceBear Lorelei (CC0 1.0), seed = expert slug.\n\n"
+        f"# Expert avatars ({len(agents)})\n\nDrawn with [DiceBear](https://github.com/dicebear/dicebear) (MIT) using the [Lorelei](https://www.figma.com/community/file/1198749693280469639) illustration collection by Lisa Wischofsky (CC0 1.0), seed = expert slug. Experts from [msitarzewski/agency-agents](https://github.com/msitarzewski/agency-agents). Thank you! 🙏\n\n"
         + "\n".join(f'<img src="{a["slug"]}.svg" width="64" title="{a["name"]}" alt="{a["name"]}">' for a in agents) + "\n",
         encoding="utf-8",
     )

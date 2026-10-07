@@ -6,6 +6,8 @@ Bộ hai plugin cho [Hermes Agent](https://hermes-agent.nousresearch.com), đưa
 
 Đây là bản chuyển từ plugin Agency Agents của DeepSeek Harness ([`@michengai/dsh-agency-agents`](https://github.com/MichengAI/dsh-agency-agents) v1.0.8). Nội dung persona lấy từ [msitarzewski/agency-agents](https://github.com/msitarzewski/agency-agents).
 
+> 🙏 **Xây dựng từ mã nguồn mở.** Toàn bộ 321 expert lấy từ **[The Agency — msitarzewski/agency-agents](https://github.com/msitarzewski/agency-agents)** của Michael Sitarzewski và các cộng tác viên. Mọi avatar được vẽ bằng thư viện avatar mã nguồn mở **[DiceBear](https://github.com/dicebear/dicebear)**, dùng bộ minh hoạ **[Lorelei](https://www.dicebear.com/styles/lorelei/)** của Lisa Wischofsky. Xin chân thành cảm ơn! Xem mục [Lời cảm ơn](#lời-cảm-ơn).
+
 <p align="center">
   <img src="avatars/chief-executive-officer.svg" width="56" title="Chief Executive Officer">
   <img src="avatars/engineering-software-architect.svg" width="56" title="Software Architect">
@@ -41,7 +43,8 @@ Bộ hai plugin cho [Hermes Agent](https://hermes-agent.nousresearch.com), đưa
 10. [Kiểm tra](#kiểm-tra)
 11. [Cấu trúc repo](#cấu-trúc-repo)
 12. [Xử lý sự cố](#xử-lý-sự-cố)
-13. [Ghi công và giấy phép](#ghi-công-và-giấy-phép)
+13. [Lời cảm ơn](#lời-cảm-ơn)
+14. [Ghi công và giấy phép](#ghi-công-và-giấy-phép)
 
 ---
 
@@ -357,6 +360,18 @@ hermes-agency-agents/
 | Expert tự tạo không có avatar | Máy đang offline (avatar của expert tự tạo lấy từ DiceBear API). Lúc này emoji sẽ hiện thay. |
 | Khi lưu báo "must create a unique slug/id" | Đã có expert hoặc team khác sinh ra cùng slug. Đổi tên khác. |
 | `agency_agents_delegate` trả về `prompt` thay vì `result` | Bản Hermes đang dùng không chạy được subagent. Model sẽ làm tiếp với prompt của persona. |
+
+---
+
+## Lời cảm ơn
+
+Dự án này sẽ không thể có nếu thiếu những người dưới đây. Xin cảm ơn vì đã chia sẻ công sức của mình một cách cởi mở.
+
+- **[The Agency — msitarzewski/agency-agents](https://github.com/msitarzewski/agency-agents).** Cảm ơn **Michael Sitarzewski** và tất cả cộng tác viên đã viết và duy trì các persona expert. Đây là phần cốt lõi của plugin: mỗi expert anh/chị dùng trong Hermes đều là công sức của họ. Nếu thấy hữu ích, hãy ⭐ star repo gốc.
+- **[MichengAI/dsh-agency-agents](https://github.com/MichengAI/dsh-agency-agents).** Cảm ơn tác giả plugin cho DeepSeek Harness. Bản Hermes này dựa theo thiết kế team chuyên gia và trải nghiệm sử dụng của plugin đó.
+- **[DiceBear](https://github.com/dicebear/dicebear).** Cảm ơn **Florian Körner** cùng các cộng tác viên DiceBear vì thư viện avatar mã nguồn mở và HTTP API miễn phí.
+- **[Bộ minh hoạ Lorelei](https://www.figma.com/community/file/1198749693280469639)** của **[Lisa Wischofsky](https://www.instagram.com/lischi_art/)**. Cảm ơn chị đã phát hành bộ minh hoạ nhân vật này theo giấy phép CC0. Gương mặt của mọi expert đều lấy từ bộ minh hoạ này.
+- **[Hermes Agent](https://hermes-agent.nousresearch.com)** của Nous Research, vì hệ thống plugin đủ mở để làm được dự án này.
 
 ---
 
