@@ -8,13 +8,15 @@ import urllib.request
 from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
 
-# Usage: python build.py [OUT_ROOT]  (default: repo root; pass D:\Hermes to install)
+# Usage: python build.py [OUT_ROOT]  (default: repo root; pass your Hermes home to install)
+# Env: DSH_AGENCY_PACKAGE = installed @michengai/dsh-agency-agents dir; AGENCY_HERMES_SKELETON = upstream skeleton dir
+import os
 OUT = Path(sys.argv[1]) if len(sys.argv) > 1 else Path(__file__).resolve().parents[1]
-DSH_PACKAGE = Path(r"C:\Users\pc\.dsh\profiles\desktop\node_modules\@michengai\dsh-agency-agents")
+DSH_PACKAGE = Path(os.environ.get("DSH_AGENCY_PACKAGE", Path.home() / ".dsh/profiles/desktop/node_modules/@michengai/dsh-agency-agents"))
 SOURCE = DSH_PACKAGE / "assets" / "agency-agents"
 REPO = Path(__file__).resolve().parents[1]
 # Upstream msitarzewski/agency-agents Hermes skeleton; the repo's own backend copy is the fallback.
-SKELETON = next(p for p in (Path(r"D:\tmp\agency-agents\integrations\hermes\agency-agents-router"), REPO / "plugins" / "agency-agents-router") if (p / "__init__.py").is_file())
+SKELETON = next(p for p in (Path(os.environ.get("AGENCY_HERMES_SKELETON", REPO / "missing")), REPO / "plugins" / "agency-agents-router") if (p / "__init__.py").is_file())
 BACKEND = OUT / "plugins" / "agency-agents-router"
 DESKTOP = OUT / "desktop-plugins" / "agency-agents"
 AVATARS = REPO / "avatars"
