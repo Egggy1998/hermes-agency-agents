@@ -58,7 +58,7 @@ Task: `
 const teamInstruction = (team, experts) => {
   const members = team.members.map(slug => experts.find(expert => expert.slug === slug)).filter(Boolean)
   const custom = members.filter(expert => expert.customPrompt)
-  const base = `Coordinate these experts in parallel: ${members.map(expert => expert.name).join(', ')}. Synthesize under this goal: ${team.goal}. `
+  const base = `Coordinate these experts in parallel: ${members.map(expert => expert.name).join(', ')}. Synthesize under this goal: ${(team.goal || team.name).replace(/[.]+$/, '')}. `
   return custom.length ? `${base}Custom specialist prompts:
 ${custom.map(expert => `## ${expert.name}
 ${expert.prompt}`).join(`
