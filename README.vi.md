@@ -2,11 +2,11 @@
 
 [English](README.md) · **Tiếng Việt**
 
-Bộ hai plugin cho [Hermes Agent](https://hermes-agent.nousresearch.com), đưa bộ chuyên gia **Agency Agents** vào Hermes: **321 expert thuộc 22 lĩnh vực (division), 5 team dựng sẵn, và mỗi expert có một avatar được đóng gói kèm**.
+Bộ hai plugin cho [Hermes Agent](https://hermes-agent.nousresearch.com), đưa bộ chuyên gia **Agency Agents** vào Hermes: **324 expert thuộc 22 lĩnh vực (division), 23 team dựng sẵn, và mỗi expert có một avatar được đóng gói kèm**.
 
 Đây là bản chuyển từ plugin Agency Agents của DeepSeek Harness ([`@michengai/dsh-agency-agents`](https://github.com/MichengAI/dsh-agency-agents) v1.0.8). Nội dung persona lấy từ [msitarzewski/agency-agents](https://github.com/msitarzewski/agency-agents).
 
-> 🙏 **Xây dựng từ mã nguồn mở.** Toàn bộ 321 expert lấy từ **[The Agency — msitarzewski/agency-agents](https://github.com/msitarzewski/agency-agents)** của Michael Sitarzewski và các cộng tác viên. Mọi avatar được vẽ bằng thư viện avatar mã nguồn mở **[DiceBear](https://github.com/dicebear/dicebear)**, dùng bộ minh hoạ **[Lorelei](https://www.dicebear.com/styles/lorelei/)** của Lisa Wischofsky. Xin chân thành cảm ơn! Xem mục [Lời cảm ơn](#lời-cảm-ơn).
+> 🙏 **Xây dựng từ mã nguồn mở.** Toàn bộ 324 expert lấy từ **[The Agency — msitarzewski/agency-agents](https://github.com/msitarzewski/agency-agents)** của Michael Sitarzewski và các cộng tác viên. Mọi avatar được vẽ bằng thư viện avatar mã nguồn mở **[DiceBear](https://github.com/dicebear/dicebear)**, dùng bộ minh hoạ **[Lorelei](https://www.dicebear.com/styles/lorelei/)** của Lisa Wischofsky. Xin chân thành cảm ơn! Xem mục [Lời cảm ơn](#lời-cảm-ơn).
 
 <p align="center">
   <img src="avatars/chief-executive-officer.svg" width="56" title="Chief Executive Officer">
@@ -20,10 +20,10 @@ Bộ hai plugin cho [Hermes Agent](https://hermes-agent.nousresearch.com), đưa
 
 | | |
 |---|---|
-| Expert | 321 |
+| Expert | 324 |
 | Division | 22 |
-| Team dựng sẵn | 5 (sửa được, và tạo thêm được) |
-| Avatar | 321 file SVG DiceBear *Lorelei*, đóng gói sẵn, dùng được khi offline |
+| Team dựng sẵn | 23 (sửa được, và tạo thêm được) |
+| Avatar | 324 file SVG DiceBear *Lorelei*, đóng gói sẵn, dùng được khi offline |
 | Tool backend | `agency_agents_search`, `agency_agents_inspect`, `agency_agents_load`, `agency_agents_delegate` |
 | Giao diện desktop | Trang Agency, nút chọn trong chatbar, form tạo/sửa expert và team |
 
@@ -54,7 +54,7 @@ Repo gồm hai plugin chạy cùng nhau.
 
 ### 1. Plugin backend: `agency-agents-router`
 
-Plugin Hermes viết bằng Python, đăng ký bốn tool. Toàn bộ danh sách expert nằm trên đĩa (`data/agents.json`), và **persona chỉ được nạp khi cần đến**. Hermes không phải nhồi 321 skill vào mọi prompt. Model tìm trong danh sách, chọn một expert rồi nạp đúng persona đó.
+Plugin Hermes viết bằng Python, đăng ký bốn tool. Toàn bộ danh sách expert nằm trên đĩa (`data/agents.json`), và **persona chỉ được nạp khi cần đến**. Hermes không phải nhồi 324 skill vào mọi prompt. Model tìm trong danh sách, chọn một expert rồi nạp đúng persona đó.
 
 ### 2. Plugin desktop: `agency-agents`
 
@@ -204,9 +204,9 @@ Dùng các nút ở phần đầu trang Agency và nút **Edit** trên từng th
 | Name | có | Dùng để sinh id của team; không được trùng. |
 | Description | không | |
 | Goal | không (nên điền) | Được đưa vào chỉ dẫn của team làm mục tiêu tổng hợp. |
-| Members | có | Chọn nhiều expert, cả có sẵn lẫn tự tạo (giữ Ctrl/Cmd khi bấm). Avatar các thành viên đã chọn hiện ngay bên dưới. |
+| Members | có | Thành viên hiện tại hiện dạng chip (bấm × để bỏ). Gõ vào ô tìm kiếm bên dưới để tick thêm expert, có sẵn hay tự tạo đều được. |
 
-Năm team dựng sẵn cũng sửa được. Thay đổi được lưu thành bản ghi đè, nên định nghĩa gốc của các team này không bị động tới.
+Các team dựng sẵn cũng sửa được. Thay đổi được lưu thành bản ghi đè, nên định nghĩa gốc của các team này không bị động tới.
 
 ### Dữ liệu chỉnh sửa được lưu ở đâu
 
@@ -247,7 +247,7 @@ Cả bốn tool thuộc toolset `agency_agents`. Tool nào nhận expert thì ch
 | Division | Số expert | Division | Số expert |
 |---|---:|---|---:|
 | academic | 7 | marketing | 43 |
-| company | 6 | paid-media | 7 |
+| company | 9 | paid-media | 7 |
 | design | 11 | product | 5 |
 | engineering | 68 | project-management | 7 |
 | finance | 9 | research | 1 |
@@ -258,7 +258,7 @@ Cả bốn tool thuộc toolset `agency_agents`. Tool nào nhận expert thì ch
 | legal | 2 | supply-chain | 4 |
 | support | 7 | testing | 10 |
 
-### Team dựng sẵn (5)
+### Team dựng sẵn (23)
 
 | Team | Thành viên | Mục tiêu |
 |---|---|---|
@@ -267,6 +267,26 @@ Cả bốn tool thuộc toolset `agency_agents`. Tool nào nhận expert thì ch
 | Content Planning Team | marketing-content-creator, marketing-growth-hacker, research-synthesist | Lên chủ đề, định vị và dàn ý nội dung dựa trên dữ liệu có căn cứ. |
 | Data Analysis Team | engineering-data-engineer, support-analytics-reporter, engineering-data-visualization-engineer | Phân tích dữ liệu đáng tin cậy, nêu rõ giả định và gợi ý biểu đồ. |
 | Research Team | research-synthesist, product-trend-researcher, specialized-strategy-duel-agent | Tách bạch sự thật đã kiểm chứng, suy luận, điểm bất đồng và đánh đổi khi ra quyết định. |
+| Executive Leadership Team | chief-executive-officer, chief-financial-officer, chief-operating-officer, chief-technology-officer, chief-product-officer, chief-marketing-officer, chief-revenue-officer, chief-people-officer, chief-legal-officer, chief-of-staff | Biến câu hỏi cấp công ty thành một quyết định: người phụ trách, ngân sách, rủi ro, kế hoạch 90 ngày. |
+| Product Discovery Team | product-manager, design-ux-researcher, product-feedback-synthesizer, product-trend-researcher, product-sprint-prioritizer | Từ ý tưởng và tín hiệu người dùng ra vấn đề đã kiểm chứng, persona, chỉ số thành công và phạm vi MVP. |
+| Product Design Studio | design-ux-architect, design-ui-designer, design-ux-researcher, design-brand-guardian, design-ui-finish-gate-reviewer, testing-accessibility-auditor | User flow, hướng UI, design token và review hoàn thiện có kiểm tra accessibility. |
+| Product Engineering Squad | engineering-software-architect, engineering-senior-developer, engineering-frontend-developer, engineering-backend-architect, engineering-mobile-app-builder, engineering-rapid-prototyper, engineering-code-reviewer | Kế hoạch kỹ thuật build được: kiến trúc, data model, API, chia task, rủi ro, checklist review. |
+| AI Product Team | engineering-ai-engineer, engineering-prompt-engineer, engineering-rag-pipeline-engineer, engineering-multi-agent-systems-architect, specialized-model-qa, security-ai-generated-code-auditor | Chọn kiến trúc AI phù hợp, đặt eval và guardrail, ước tính chất lượng, độ trễ, chi phí. |
+| Platform & Reliability Team | engineering-devops-automator, engineering-sre, engineering-database-optimizer, engineering-finops-engineer, engineering-incident-response-commander, security-cloud-security-architect | Pipeline deploy, SLO, monitoring, kế hoạch scale và chi phí, runbook xử lý sự cố. |
+| QA & Release Team | testing-test-automation-engineer, testing-api-tester, testing-performance-benchmarker, testing-evidence-collector, testing-reality-checker, engineering-mobile-release-engineer | Test plan, phạm vi automation, ngân sách hiệu năng và kết luận go/no-go có bằng chứng. |
+| Security & Privacy Team | security-architect, security-appsec-engineer, security-penetration-tester, security-secrets-credential-engineer, engineering-privacy-engineer, security-compliance-auditor | Threat model, danh sách lỗ hổng ưu tiên kèm cách sửa tối thiểu, review auth/secrets, privacy. |
+| Delivery & PMO Team | project-manager-senior, project-management-project-shepherd, project-management-experiment-tracker, project-management-jira-workflow-steward, project-management-meeting-notes-specialist | Biến mục tiêu thành milestone có người phụ trách, dependency, rủi ro và báo cáo tuần. |
+| Growth Marketing Powerhouse | chief-marketing-officer, marketing-growth-hacker, design-brand-guardian, marketing-content-creator, marketing-seo-specialist, marketing-ai-citation-strategist, marketing-social-media-strategist, marketing-tiktok-strategist, paid-media-paid-social-strategist, paid-media-creative-strategist, paid-media-tracking-specialist, marketing-email-strategist, marketing-pr-communications-manager, support-analytics-reporter | Kế hoạch tăng trưởng theo từng kênh: định vị, offer, góc nội dung/creative, ngân sách ads, tracking, KPI tuần. |
+| Build 0 · Go/No-go Decision | chief-executive-officer, chief-financial-officer, chief-product-officer, chief-marketing-officer, product-trend-researcher, research-synthesist | Quyết định GO/NO-GO cho ý tưởng → docs/00-decision.md |
+| Build 1 · Discovery & PRD | product-manager, design-ux-researcher, product-feedback-synthesizer, product-trend-researcher, product-sprint-prioritizer | Đọc 00 → vấn đề, persona, MVP 3-5 tính năng, chỉ số thành công → docs/01-prd.md |
+| Build 2 · Design & Architecture | product-manager, design-ux-architect, design-ui-designer, engineering-software-architect, engineering-backend-architect, engineering-ai-engineer | Đọc 01 → docs/02-design.md + docs/03-tech-plan.md |
+| Build 2b · Pre-launch Marketing | chief-marketing-officer, marketing-growth-hacker, design-brand-guardian, marketing-content-creator, marketing-seo-specialist, marketing-social-media-strategist, marketing-email-strategist | Đọc 01 → định vị, landing waitlist, lịch nội dung trước ra mắt → docs/04-gtm.md |
+| Build 3 · Build Sprint | project-manager-senior, engineering-senior-developer, engineering-frontend-developer, engineering-backend-architect, engineering-rapid-prototyper, engineering-code-reviewer | Đọc 03 + 05 → build milestone tiếp theo, review code, cập nhật docs/05-progress.md |
+| Build 4 · Release Gate | testing-reality-checker, testing-test-automation-engineer, testing-api-tester, testing-performance-benchmarker, security-appsec-engineer, security-secrets-credential-engineer, engineering-sre | Test chức năng, API, hiệu năng, bảo mật; mặc định NO-GO → docs/06-release-verdict.md |
+| Build 5 · Launch & Growth | chief-marketing-officer, paid-media-paid-social-strategist, paid-media-creative-strategist, paid-media-tracking-specialist, marketing-tiktok-strategist, marketing-content-creator, support-analytics-reporter | Đọc 04 + 06 → chạy ra mắt, ads, tracking, báo cáo KPI → docs/07-kpi-week-N.md |
+| Build 6 · Monthly Iterate | chief-executive-officer, chief-financial-officer, product-manager, product-feedback-synthesizer, support-analytics-reporter, product-sprint-prioritizer | Đọc KPI + phản hồi → giữ / cắt / làm tiếp → docs/01-prd-vN.md, quay lại Build 2 |
+
+**Build sản phẩm từ con số 0:** chạy lần lượt các team `Build 0` → `Build 6`. Mỗi team đọc file của giai đoạn trước và ghi file cho giai đoạn sau vào thư mục `docs/` của dự án, nên khi bấm **Use team** hãy gõ kèm đường dẫn dự án (ví dụ `Dự án: D:/du-an/app. Ý tưởng: ...`). `Build 2` và `Build 2b` chạy song song được; `Build 3` gọi lại cho từng milestone; `Build 6` mỗi tháng quay lại `Build 2`.
 
 Danh sách đầy đủ các expert nằm trong [`plugins/agency-agents-router/data/agents.json`](plugins/agency-agents-router/data/agents.json). Toàn bộ avatar xem tại [thư viện avatar](avatars/README.md).
 
@@ -276,7 +296,7 @@ Danh sách đầy đủ các expert nằm trong [`plugins/agency-agents-router/d
 
 - Mỗi expert có một avatar **DiceBear [Lorelei](https://www.dicebear.com/styles/lorelei/)**, sinh từ slug của expert. Vì vậy cùng một expert luôn có cùng một khuôn mặt.
 - Bảng màu nền: `b6e3f4, c0aede, d1d4f9`.
-- Cả 321 file SVG nằm trong [`avatars/`](avatars/) và được **nhúng thẳng vào `plugin.js`**. Hermes Desktop nạp plugin từ một địa chỉ `blob:`, nên plugin không đọc được file nằm cạnh nó. Nhúng SVG vào là cách để avatar hiện được cả khi offline.
+- Cả 324 file SVG nằm trong [`avatars/`](avatars/) và được **nhúng thẳng vào `plugin.js`**. Hermes Desktop nạp plugin từ một địa chỉ `blob:`, nên plugin không đọc được file nằm cạnh nó. Nhúng SVG vào là cách để avatar hiện được cả khi offline.
 - **Expert tự tạo** lấy avatar từ `https://api.dicebear.com/10.x/lorelei/svg?seed=<slug>`.
 - Nếu avatar không tải được, **emoji** của expert sẽ hiện thay.
 - Team hiển thị **avatar thành viên xếp chồng**: tối đa 6 avatar, phần còn lại gộp thành ô `+N`. Rê chuột vào avatar để xem tên expert.
@@ -300,7 +320,7 @@ python scripts/build.py "$HERMES_HOME"   # sinh lại và cài thẳng vào Herm
 `build.py` làm các bước sau:
 
 1. Đọc front matter của từng file Markdown persona (`name`, `description`, `emoji`, `color`, `vibe`) và kiểm tra không có hai persona trùng slug.
-2. Ghi backend: `__init__.py`, `plugin.yaml`, `data/agents.json`, `data/teams.json` và các file giấy phép.
+2. Ghi backend: `__init__.py`, `plugin.yaml`, `data/agents.json`, `data/teams.json` và các file giấy phép. Team dựng sẵn lấy từ file `data/teams.json` đã commit: sửa file đó rồi build lại. Expert chỉ có trong roster đã commit (không có trong package DSH) vẫn được giữ.
 3. Tải những avatar chưa có trong `avatars/` (8 request song song, mỗi file đều được kiểm tra đúng là SVG) rồi tạo lại thư viện avatar.
 4. Sinh `desktop-plugins/agency-agents/plugin.js` gồm danh sách expert, các team và avatar đã nhúng.
 
@@ -314,7 +334,7 @@ Yêu cầu: Python 3.10 trở lên, chỉ dùng thư viện chuẩn. Cần thêm
 
 ```bash
 python scripts/check.py
-# check ok: 321 experts, 5 teams, 321 bundled avatars, 4 tools
+# check ok: 324 experts, 5 teams, 324 bundled avatars, 4 tools
 
 node desktop-plugins/agency-agents/check-catalog.mjs
 # catalog check: ok
@@ -334,13 +354,13 @@ hermes-agency-agents/
 ├── plugins/agency-agents-router/     # Plugin backend Hermes (Python)
 │   ├── __init__.py                   #   đăng ký 4 tool
 │   ├── plugin.yaml
-│   ├── data/agents.json              #   321 expert kèm nội dung persona đầy đủ
-│   ├── data/teams.json               #   5 team dựng sẵn
+│   ├── data/agents.json              #   324 expert kèm nội dung persona đầy đủ
+│   ├── data/teams.json               #   23 team dựng sẵn
 │   └── AGENCY-AGENTS-LICENSE, DSH-LICENSE, DSH-NOTICE
 ├── desktop-plugins/agency-agents/    # Plugin Hermes Desktop (ESM)
 │   ├── plugin.js                     #   giao diện + danh sách expert + avatar nhúng (~2 MB)
 │   └── check-catalog.mjs             #   kiểm tra phần expert/team tự tạo
-├── avatars/                          # 321 file SVG Lorelei + README thư viện avatar
+├── avatars/                          # 324 file SVG Lorelei + README thư viện avatar
 ├── scripts/
 │   ├── build.py                      # script sinh plugin
 │   └── check.py                      # kiểm tra toàn repo

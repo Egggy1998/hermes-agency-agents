@@ -2,11 +2,11 @@
 
 **English** · [Tiếng Việt](README.vi.md)
 
-A plugin pair for [Hermes Agent](https://hermes-agent.nousresearch.com) that brings the **Agency Agents** expert roster into Hermes: **321 specialist personas across 22 divisions, 5 ready-made expert teams, and a bundled avatar for every expert**.
+A plugin pair for [Hermes Agent](https://hermes-agent.nousresearch.com) that brings the **Agency Agents** expert roster into Hermes: **324 specialist personas across 22 divisions, 23 ready-made expert teams, and a bundled avatar for every expert**.
 
 It is a port of the Agency Agents plugin from DeepSeek Harness ([`@michengai/dsh-agency-agents`](https://github.com/MichengAI/dsh-agency-agents) v1.0.8). The personas come from [msitarzewski/agency-agents](https://github.com/msitarzewski/agency-agents).
 
-> 🙏 **Built on the shoulders of open source.** All 321 experts come from **[The Agency — msitarzewski/agency-agents](https://github.com/msitarzewski/agency-agents)** by Michael Sitarzewski and contributors. Every avatar is drawn with the open-source **[DiceBear](https://github.com/dicebear/dicebear)** avatar library and Lisa Wischofsky's **[Lorelei](https://www.dicebear.com/styles/lorelei/)** illustration collection. Thank you! See [Acknowledgements](#acknowledgements).
+> 🙏 **Built on the shoulders of open source.** All 324 experts come from **[The Agency — msitarzewski/agency-agents](https://github.com/msitarzewski/agency-agents)** by Michael Sitarzewski and contributors. Every avatar is drawn with the open-source **[DiceBear](https://github.com/dicebear/dicebear)** avatar library and Lisa Wischofsky's **[Lorelei](https://www.dicebear.com/styles/lorelei/)** illustration collection. Thank you! See [Acknowledgements](#acknowledgements).
 
 <p align="center">
   <img src="avatars/chief-executive-officer.svg" width="56" title="Chief Executive Officer">
@@ -20,10 +20,10 @@ It is a port of the Agency Agents plugin from DeepSeek Harness ([`@michengai/dsh
 
 | | |
 |---|---|
-| Experts | 321 |
+| Experts | 324 |
 | Divisions | 22 |
-| Team presets | 5 (editable, and you can add more) |
-| Avatars | 321 DiceBear *Lorelei* SVGs, bundled for offline use |
+| Team presets | 23 (editable, and you can add more) |
+| Avatars | 324 DiceBear *Lorelei* SVGs, bundled for offline use |
 | Backend tools | `agency_agents_search`, `agency_agents_inspect`, `agency_agents_load`, `agency_agents_delegate` |
 | Desktop UI | Agency page, chat composer picker, expert/team editor |
 
@@ -54,7 +54,7 @@ The repository has two plugins that work together.
 
 ### 1. Backend plugin: `agency-agents-router`
 
-This is a Python Hermes plugin that registers four tools. It keeps the whole roster on disk (`data/agents.json`) and **loads a persona only when it is asked for**. Hermes does not get 321 extra skills crammed into every prompt. The model searches the roster, picks an expert and loads only that one persona.
+This is a Python Hermes plugin that registers four tools. It keeps the whole roster on disk (`data/agents.json`) and **loads a persona only when it is asked for**. Hermes does not get 324 extra skills crammed into every prompt. The model searches the roster, picks an expert and loads only that one persona.
 
 ### 2. Desktop plugin: `agency-agents`
 
@@ -204,9 +204,9 @@ Use the buttons in the Agency page header and the **Edit** button on each card.
 | Name | yes | Used to generate the team id; must be unique. |
 | Description | no | |
 | Goal | no (recommended) | Injected into the team instruction as the synthesis goal. |
-| Members | yes | Multi-select from all experts, built-in and custom (Ctrl/Cmd+click). The selected members' avatars are shown under the list. |
+| Members | yes | Current members are shown as chips (× removes one). Search below to tick more experts, built-in or custom. |
 
-The five preset teams can be edited too. Your changes are stored as overrides, so the preset definitions themselves are never modified.
+The preset teams can be edited too. Your changes are stored as overrides, so the preset definitions themselves are never modified.
 
 ### Where your edits are stored
 
@@ -247,7 +247,7 @@ All four tools belong to the `agency_agents` toolset. Every tool that takes an e
 | Division | Experts | Division | Experts |
 |---|---:|---|---:|
 | academic | 7 | marketing | 43 |
-| company | 6 | paid-media | 7 |
+| company | 9 | paid-media | 7 |
 | design | 11 | product | 5 |
 | engineering | 68 | project-management | 7 |
 | finance | 9 | research | 1 |
@@ -258,7 +258,7 @@ All four tools belong to the `agency_agents` toolset. Every tool that takes an e
 | legal | 2 | supply-chain | 4 |
 | support | 7 | testing | 10 |
 
-### Team presets (5)
+### Team presets (23)
 
 | Team | Members | Goal |
 |---|---|---|
@@ -267,6 +267,26 @@ All four tools belong to the `agency_agents` toolset. Every tool that takes an e
 | Content Planning Team | marketing-content-creator, marketing-growth-hacker, research-synthesist | Create evidence-aware topics, positioning, and content outlines. |
 | Data Analysis Team | engineering-data-engineer, support-analytics-reporter, engineering-data-visualization-engineer | Produce trustworthy analysis with explicit assumptions and chart guidance. |
 | Research Team | research-synthesist, product-trend-researcher, specialized-strategy-duel-agent | Separate verified facts, inference, disagreement, and decision trade-offs. |
+| Executive Leadership Team | chief-executive-officer, chief-financial-officer, chief-operating-officer, chief-technology-officer, chief-product-officer, chief-marketing-officer, chief-revenue-officer, chief-people-officer, chief-legal-officer, chief-of-staff | Turn a company-level question into one decision with owner, budget, risks, and a 90-day execution plan. |
+| Product Discovery Team | product-manager, design-ux-researcher, product-feedback-synthesizer, product-trend-researcher, product-sprint-prioritizer | Turn raw ideas and user signals into a validated problem, target user, success metric, and prioritized MVP scope. |
+| Product Design Studio | design-ux-architect, design-ui-designer, design-ux-researcher, design-brand-guardian, design-ui-finish-gate-reviewer, testing-accessibility-auditor | Deliver user flows, wireframe-to-UI direction, design tokens, and a finish-gate review with accessibility issues called out. |
+| Product Engineering Squad | engineering-software-architect, engineering-senior-developer, engineering-frontend-developer, engineering-backend-architect, engineering-mobile-app-builder, engineering-rapid-prototyper, engineering-code-reviewer | Produce a buildable technical plan: architecture, data model, API contracts, task breakdown, risks, and review checklist. |
+| AI Product Team | engineering-ai-engineer, engineering-prompt-engineer, engineering-rag-pipeline-engineer, engineering-multi-agent-systems-architect, specialized-model-qa, security-ai-generated-code-auditor | Choose the right AI architecture, define evals and guardrails, and estimate quality, latency, and cost before shipping. |
+| Platform & Reliability Team | engineering-devops-automator, engineering-sre, engineering-database-optimizer, engineering-finops-engineer, engineering-incident-response-commander, security-cloud-security-architect | Define deploy pipeline, SLOs, monitoring, scaling and cost plan, plus an incident runbook. |
+| QA & Release Team | testing-test-automation-engineer, testing-api-tester, testing-performance-benchmarker, testing-evidence-collector, testing-reality-checker, engineering-mobile-release-engineer | Produce a test plan, automation scope, performance budget, and a go/no-go release verdict backed by evidence. |
+| Security & Privacy Team | security-architect, security-appsec-engineer, security-penetration-tester, security-secrets-credential-engineer, engineering-privacy-engineer, security-compliance-auditor | Deliver a threat model, prioritized vulnerability list with minimal fixes, secrets/auth review, and privacy/compliance gaps. |
+| Delivery & PMO Team | project-manager-senior, project-management-project-shepherd, project-management-experiment-tracker, project-management-jira-workflow-steward, project-management-meeting-notes-specialist | Turn goals into a milestone plan with owners, dependencies, risks, experiment tracking, and weekly status. |
+| Growth Marketing Powerhouse | chief-marketing-officer, marketing-growth-hacker, design-brand-guardian, marketing-content-creator, marketing-seo-specialist, marketing-ai-citation-strategist, marketing-social-media-strategist, marketing-tiktok-strategist, paid-media-paid-social-strategist, paid-media-creative-strategist, paid-media-tracking-specialist, marketing-email-strategist, marketing-pr-communications-manager, support-analytics-reporter | Build a channel-by-channel growth plan with positioning, offer, content and creative angles, paid budget split, tracking, and weekly KPIs tied to revenue. |
+| Build 0 · Go/No-go Decision | chief-executive-officer, chief-financial-officer, chief-product-officer, chief-marketing-officer, product-trend-researcher, research-synthesist | Decide GO or NO-GO for the idea: target customer, painful problem, market and competitor evidence, business model, budget, and 90-day plan. Save the decision memo to docs/00-decision.md in the project folder |
+| Build 1 · Discovery & PRD | product-manager, design-ux-researcher, product-feedback-synthesizer, product-trend-researcher, product-sprint-prioritizer | Read docs/00-decision.md. Define problem, primary persona, jobs-to-be-done, MVP limited to 3-5 features, explicit out-of-scope list, and success metrics. Save to docs/01-prd.md |
+| Build 2 · Design & Architecture | product-manager, design-ux-architect, design-ui-designer, engineering-software-architect, engineering-backend-architect, engineering-ai-engineer | Read docs/01-prd.md. Save user flows, screen list, and UI direction/tokens to docs/02-design.md. Save architecture, stack, data model, API contracts, AI approach if any, and an ordered task breakdown with milestones to docs/03-tech-plan.md |
+| Build 2b · Pre-launch Marketing | chief-marketing-officer, marketing-growth-hacker, design-brand-guardian, marketing-content-creator, marketing-seo-specialist, marketing-social-media-strategist, marketing-email-strategist | Read docs/01-prd.md. Define positioning and offer, waitlist landing page copy, pre-launch content calendar, channel priorities, and waitlist KPI targets. Save to docs/04-gtm.md |
+| Build 3 · Build Sprint | project-manager-senior, engineering-senior-developer, engineering-frontend-developer, engineering-backend-architect, engineering-rapid-prototyper, engineering-code-reviewer | Read docs/03-tech-plan.md and docs/05-progress.md if it exists. Implement the next milestone only, review the code, and append what shipped, what is blocked, and the next milestone to docs/05-progress.md |
+| Build 4 · Release Gate | testing-reality-checker, testing-test-automation-engineer, testing-api-tester, testing-performance-benchmarker, security-appsec-engineer, security-secrets-credential-engineer, engineering-sre | Test the MVP for functional bugs, API contract breaks, performance, security (auth, secrets, OWASP), and production readiness. Default to NO-GO unless evidence proves otherwise. Save the verdict with blocking issues and minimal fixes to docs/06-release-verdict.md |
+| Build 5 · Launch & Growth | chief-marketing-officer, paid-media-paid-social-strategist, paid-media-creative-strategist, paid-media-tracking-specialist, marketing-tiktok-strategist, marketing-content-creator, support-analytics-reporter | Read docs/04-gtm.md and docs/06-release-verdict.md. Run the launch plan: channels, ad creatives and budget split, tracking setup, and launch-week schedule. Then report funnel KPIs and next actions to docs/07-kpi-week-N.md |
+| Build 6 · Monthly Iterate | chief-executive-officer, chief-financial-officer, product-manager, product-feedback-synthesizer, support-analytics-reporter, product-sprint-prioritizer | Read the latest docs/07-kpi-week-*.md and user feedback. Decide keep / cut / build next, update unit economics, and save the next PRD to docs/01-prd-vN.md, then restart from Build 2 |
+
+**Building a product from zero:** run the `Build 0` → `Build 6` teams in order. Each one reads the previous phase's file and writes the next one under `docs/` in your project folder, so add the project path when you use the team (for example `Project: D:/work/my-app. Idea: ...`). `Build 2` and `Build 2b` can run in parallel; repeat `Build 3` per milestone; `Build 6` loops back to `Build 2` every month.
 
 The full list of experts is in [`plugins/agency-agents-router/data/agents.json`](plugins/agency-agents-router/data/agents.json), and all the avatars are in the [avatar gallery](avatars/README.md).
 
@@ -276,7 +296,7 @@ The full list of experts is in [`plugins/agency-agents-router/data/agents.json`]
 
 - Every expert has a **DiceBear [Lorelei](https://www.dicebear.com/styles/lorelei/)** avatar, seeded with its slug. The same expert therefore always gets the same face.
 - The background palette is `b6e3f4, c0aede, d1d4f9`.
-- All 321 SVGs are stored in [`avatars/`](avatars/) and **embedded in `plugin.js`**. Hermes Desktop loads plugins from a `blob:` URL, so a plugin cannot fetch files that sit next to it. Embedding the SVGs is what lets avatars work offline.
+- All 324 SVGs are stored in [`avatars/`](avatars/) and **embedded in `plugin.js`**. Hermes Desktop loads plugins from a `blob:` URL, so a plugin cannot fetch files that sit next to it. Embedding the SVGs is what lets avatars work offline.
 - **Custom experts** get their avatar from `https://api.dicebear.com/10.x/lorelei/svg?seed=<slug>`.
 - If an avatar fails to load, the expert's **emoji** is shown instead.
 - Teams show **stacked member avatars**: up to 6, plus a `+N` badge for the rest. Hover an avatar to see the expert's name.
@@ -300,7 +320,7 @@ python scripts/build.py "$HERMES_HOME"   # regenerate and install into Hermes
 What `build.py` does:
 
 1. Parses the front matter of every persona Markdown file (`name`, `description`, `emoji`, `color`, `vibe`) and checks that no two personas share a slug.
-2. Writes the backend: `__init__.py`, `plugin.yaml`, `data/agents.json`, `data/teams.json` and the license files.
+2. Writes the backend: `__init__.py`, `plugin.yaml`, `data/agents.json`, `data/teams.json` and the license files. Team presets come from the committed `data/teams.json`: edit it, then rebuild. Experts that exist only in the committed roster (not in the DSH package) are kept.
 3. Downloads any avatar not yet in `avatars/` (8 parallel requests, each checked to be an SVG) and regenerates the gallery.
 4. Generates `desktop-plugins/agency-agents/plugin.js` with the roster, the teams and the embedded avatars.
 
@@ -314,7 +334,7 @@ Requirements: Python 3.10+ with only the standard library, plus Node.js if you w
 
 ```bash
 python scripts/check.py
-# check ok: 321 experts, 5 teams, 321 bundled avatars, 4 tools
+# check ok: 324 experts, 5 teams, 324 bundled avatars, 4 tools
 
 node desktop-plugins/agency-agents/check-catalog.mjs
 # catalog check: ok
@@ -334,13 +354,13 @@ hermes-agency-agents/
 ├── plugins/agency-agents-router/     # Backend Hermes plugin (Python)
 │   ├── __init__.py                   #   registers the 4 tools
 │   ├── plugin.yaml
-│   ├── data/agents.json              #   321 experts incl. full persona bodies
+│   ├── data/agents.json              #   324 experts incl. full persona bodies
 │   ├── data/teams.json               #   5 team presets
 │   └── AGENCY-AGENTS-LICENSE, DSH-LICENSE, DSH-NOTICE
 ├── desktop-plugins/agency-agents/    # Hermes Desktop plugin (ESM)
 │   ├── plugin.js                     #   UI + roster + embedded avatars (~2 MB)
 │   └── check-catalog.mjs             #   custom catalog self-check
-├── avatars/                          # 321 Lorelei SVGs + gallery README
+├── avatars/                          # 324 Lorelei SVGs + gallery README
 ├── scripts/
 │   ├── build.py                      # generator
 │   └── check.py                      # repo self-check

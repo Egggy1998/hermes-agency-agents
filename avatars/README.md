@@ -1,4 +1,4 @@
-# Expert avatars (321)
+# Expert avatars (324)
 
 Drawn with [DiceBear](https://github.com/dicebear/dicebear) (MIT) using the [Lorelei](https://www.figma.com/community/file/1198749693280469639) illustration collection by Lisa Wischofsky (CC0 1.0), seed = expert slug. Experts from [msitarzewski/agency-agents](https://github.com/msitarzewski/agency-agents). Thank you! 🙏
 
@@ -323,3 +323,6 @@ Drawn with [DiceBear](https://github.com/dicebear/dicebear) (MIT) using the [Lor
 <img src="testing-test-results-analyzer.svg" width="64" title="Test Results Analyzer" alt="Test Results Analyzer">
 <img src="testing-tool-evaluator.svg" width="64" title="Tool Evaluator" alt="Tool Evaluator">
 <img src="testing-workflow-optimizer.svg" width="64" title="Workflow Optimizer" alt="Workflow Optimizer">
+<img src="chief-people-officer.svg" width="64" title="Chief People Officer (CHRO)" alt="Chief People Officer (CHRO)">
+<img src="chief-legal-officer.svg" width="64" title="Chief Legal Officer (General Counsel)" alt="Chief Legal Officer (General Counsel)">
+<img src="chief-revenue-officer.svg" width="64" title="Chief Revenue Officer (CRO)" alt="Chief Revenue Officer (CRO)">

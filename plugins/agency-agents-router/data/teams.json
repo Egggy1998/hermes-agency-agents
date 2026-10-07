@@ -53,5 +53,270 @@
       "product-trend-researcher",
       "specialized-strategy-duel-agent"
     ]
+  },
+  {
+    "id": "team-leadership",
+    "name": "Executive Leadership Team",
+    "description": "C-suite board that pressure-tests company-level decisions across strategy, money, product, tech, growth, people, legal, and execution.",
+    "goal": "Turn a company-level question into one decision with owner, budget, risks, and a 90-day execution plan.",
+    "members": [
+      "chief-executive-officer",
+      "chief-financial-officer",
+      "chief-operating-officer",
+      "chief-technology-officer",
+      "chief-product-officer",
+      "chief-marketing-officer",
+      "chief-revenue-officer",
+      "chief-people-officer",
+      "chief-legal-officer",
+      "chief-of-staff"
+    ]
+  },
+  {
+    "id": "team-product-discovery",
+    "name": "Product Discovery Team",
+    "description": "Find the problem worth solving: user research, feedback, market signals, and ruthless prioritization before anyone writes code.",
+    "goal": "Turn raw ideas and user signals into a validated problem, target user, success metric, and prioritized MVP scope.",
+    "members": [
+      "product-manager",
+      "design-ux-researcher",
+      "product-feedback-synthesizer",
+      "product-trend-researcher",
+      "product-sprint-prioritizer"
+    ]
+  },
+  {
+    "id": "team-product-design",
+    "name": "Product Design Studio",
+    "description": "Own flows, information architecture, UI system, and finish quality so the product feels premium and accessible.",
+    "goal": "Deliver user flows, wireframe-to-UI direction, design tokens, and a finish-gate review with accessibility issues called out.",
+    "members": [
+      "design-ux-architect",
+      "design-ui-designer",
+      "design-ux-researcher",
+      "design-brand-guardian",
+      "design-ui-finish-gate-reviewer",
+      "testing-accessibility-auditor"
+    ]
+  },
+  {
+    "id": "team-product-engineering",
+    "name": "Product Engineering Squad",
+    "description": "Build and ship features end to end across web, backend, and mobile with clean architecture and reviewed code.",
+    "goal": "Produce a buildable technical plan: architecture, data model, API contracts, task breakdown, risks, and review checklist.",
+    "members": [
+      "engineering-software-architect",
+      "engineering-senior-developer",
+      "engineering-frontend-developer",
+      "engineering-backend-architect",
+      "engineering-mobile-app-builder",
+      "engineering-rapid-prototyper",
+      "engineering-code-reviewer"
+    ]
+  },
+  {
+    "id": "team-ai-product",
+    "name": "AI Product Team",
+    "description": "Design and ship LLM/agent features: prompts, RAG, multi-agent orchestration, evals, and AI-code safety.",
+    "goal": "Choose the right AI architecture, define evals and guardrails, and estimate quality, latency, and cost before shipping.",
+    "members": [
+      "engineering-ai-engineer",
+      "engineering-prompt-engineer",
+      "engineering-rag-pipeline-engineer",
+      "engineering-multi-agent-systems-architect",
+      "specialized-model-qa",
+      "security-ai-generated-code-auditor"
+    ]
+  },
+  {
+    "id": "team-platform-reliability",
+    "name": "Platform & Reliability Team",
+    "description": "Keep the product fast, up, and affordable: CI/CD, infrastructure, databases, observability, incidents, and cloud cost.",
+    "goal": "Define deploy pipeline, SLOs, monitoring, scaling and cost plan, plus an incident runbook.",
+    "members": [
+      "engineering-devops-automator",
+      "engineering-sre",
+      "engineering-database-optimizer",
+      "engineering-finops-engineer",
+      "engineering-incident-response-commander",
+      "security-cloud-security-architect"
+    ]
+  },
+  {
+    "id": "team-qa-release",
+    "name": "QA & Release Team",
+    "description": "Prove the product works before users find out it doesn't: automation, API and performance tests, evidence-based release gates.",
+    "goal": "Produce a test plan, automation scope, performance budget, and a go/no-go release verdict backed by evidence.",
+    "members": [
+      "testing-test-automation-engineer",
+      "testing-api-tester",
+      "testing-performance-benchmarker",
+      "testing-evidence-collector",
+      "testing-reality-checker",
+      "engineering-mobile-release-engineer"
+    ]
+  },
+  {
+    "id": "team-security-compliance",
+    "name": "Security & Privacy Team",
+    "description": "Threat-model the product, harden auth and secrets, test for vulnerabilities, and keep privacy and compliance in order.",
+    "goal": "Deliver a threat model, prioritized vulnerability list with minimal fixes, secrets/auth review, and privacy/compliance gaps.",
+    "members": [
+      "security-architect",
+      "security-appsec-engineer",
+      "security-penetration-tester",
+      "security-secrets-credential-engineer",
+      "engineering-privacy-engineer",
+      "security-compliance-auditor"
+    ]
+  },
+  {
+    "id": "team-delivery",
+    "name": "Delivery & PMO Team",
+    "description": "Keep multi-team product work on schedule: roadmap execution, dependencies, experiments, and decision logs.",
+    "goal": "Turn goals into a milestone plan with owners, dependencies, risks, experiment tracking, and weekly status.",
+    "members": [
+      "project-manager-senior",
+      "project-management-project-shepherd",
+      "project-management-experiment-tracker",
+      "project-management-jira-workflow-steward",
+      "project-management-meeting-notes-specialist"
+    ]
+  },
+  {
+    "id": "team-growth-marketing",
+    "name": "Growth Marketing Powerhouse",
+    "description": "Full-funnel marketing team: brand, positioning, content, SEO/GEO, social and short video, paid ads, email, PR, and analytics working as one growth engine.",
+    "goal": "Build a channel-by-channel growth plan with positioning, offer, content and creative angles, paid budget split, tracking, and weekly KPIs tied to revenue.",
+    "members": [
+      "chief-marketing-officer",
+      "marketing-growth-hacker",
+      "design-brand-guardian",
+      "marketing-content-creator",
+      "marketing-seo-specialist",
+      "marketing-ai-citation-strategist",
+      "marketing-social-media-strategist",
+      "marketing-tiktok-strategist",
+      "paid-media-paid-social-strategist",
+      "paid-media-creative-strategist",
+      "paid-media-tracking-specialist",
+      "marketing-email-strategist",
+      "marketing-pr-communications-manager",
+      "support-analytics-reporter"
+    ]
+  },
+  {
+    "id": "build-0-decision",
+    "name": "Build 0 · Go/No-go Decision",
+    "description": "Phase 0 (1 day): decide whether the idea is worth building before spending on it.",
+    "goal": "Decide GO or NO-GO for the idea: target customer, painful problem, market and competitor evidence, business model, budget, and 90-day plan. Save the decision memo to docs/00-decision.md in the project folder",
+    "members": [
+      "chief-executive-officer",
+      "chief-financial-officer",
+      "chief-product-officer",
+      "chief-marketing-officer",
+      "product-trend-researcher",
+      "research-synthesist"
+    ]
+  },
+  {
+    "id": "build-1-discovery",
+    "name": "Build 1 · Discovery & PRD",
+    "description": "Phase 1 (week 1): turn the GO decision into a sharp MVP scope.",
+    "goal": "Read docs/00-decision.md. Define problem, primary persona, jobs-to-be-done, MVP limited to 3-5 features, explicit out-of-scope list, and success metrics. Save to docs/01-prd.md",
+    "members": [
+      "product-manager",
+      "design-ux-researcher",
+      "product-feedback-synthesizer",
+      "product-trend-researcher",
+      "product-sprint-prioritizer"
+    ]
+  },
+  {
+    "id": "build-2-design-architecture",
+    "name": "Build 2 · Design & Architecture",
+    "description": "Phase 2 (weeks 1-2): design the experience and the system in parallel from the same PRD.",
+    "goal": "Read docs/01-prd.md. Save user flows, screen list, and UI direction/tokens to docs/02-design.md. Save architecture, stack, data model, API contracts, AI approach if any, and an ordered task breakdown with milestones to docs/03-tech-plan.md",
+    "members": [
+      "product-manager",
+      "design-ux-architect",
+      "design-ui-designer",
+      "engineering-software-architect",
+      "engineering-backend-architect",
+      "engineering-ai-engineer"
+    ]
+  },
+  {
+    "id": "build-2b-gtm",
+    "name": "Build 2b · Pre-launch Marketing",
+    "description": "Phase 2b (from week 1): start marketing before the product exists; a waitlist is the cheapest validation.",
+    "goal": "Read docs/01-prd.md. Define positioning and offer, waitlist landing page copy, pre-launch content calendar, channel priorities, and waitlist KPI targets. Save to docs/04-gtm.md",
+    "members": [
+      "chief-marketing-officer",
+      "marketing-growth-hacker",
+      "design-brand-guardian",
+      "marketing-content-creator",
+      "marketing-seo-specialist",
+      "marketing-social-media-strategist",
+      "marketing-email-strategist"
+    ]
+  },
+  {
+    "id": "build-3-build",
+    "name": "Build 3 · Build Sprint",
+    "description": "Phase 3 (weeks 2-6): ship the MVP milestone by milestone with review on every change.",
+    "goal": "Read docs/03-tech-plan.md and docs/05-progress.md if it exists. Implement the next milestone only, review the code, and append what shipped, what is blocked, and the next milestone to docs/05-progress.md",
+    "members": [
+      "project-manager-senior",
+      "engineering-senior-developer",
+      "engineering-frontend-developer",
+      "engineering-backend-architect",
+      "engineering-rapid-prototyper",
+      "engineering-code-reviewer"
+    ]
+  },
+  {
+    "id": "build-4-release-gate",
+    "name": "Build 4 · Release Gate",
+    "description": "Phase 4: independent go/no-go check before launch; builders never certify their own work.",
+    "goal": "Test the MVP for functional bugs, API contract breaks, performance, security (auth, secrets, OWASP), and production readiness. Default to NO-GO unless evidence proves otherwise. Save the verdict with blocking issues and minimal fixes to docs/06-release-verdict.md",
+    "members": [
+      "testing-reality-checker",
+      "testing-test-automation-engineer",
+      "testing-api-tester",
+      "testing-performance-benchmarker",
+      "security-appsec-engineer",
+      "security-secrets-credential-engineer",
+      "engineering-sre"
+    ]
+  },
+  {
+    "id": "build-5-launch",
+    "name": "Build 5 · Launch & Growth",
+    "description": "Phase 5: launch, buy traffic carefully, and measure the funnel from day one.",
+    "goal": "Read docs/04-gtm.md and docs/06-release-verdict.md. Run the launch plan: channels, ad creatives and budget split, tracking setup, and launch-week schedule. Then report funnel KPIs and next actions to docs/07-kpi-week-N.md",
+    "members": [
+      "chief-marketing-officer",
+      "paid-media-paid-social-strategist",
+      "paid-media-creative-strategist",
+      "paid-media-tracking-specialist",
+      "marketing-tiktok-strategist",
+      "marketing-content-creator",
+      "support-analytics-reporter"
+    ]
+  },
+  {
+    "id": "build-6-iterate",
+    "name": "Build 6 · Monthly Iterate",
+    "description": "Phase 6 (monthly): use real data and feedback to decide what to keep, cut, and build next.",
+    "goal": "Read the latest docs/07-kpi-week-*.md and user feedback. Decide keep / cut / build next, update unit economics, and save the next PRD to docs/01-prd-vN.md, then restart from Build 2",
+    "members": [
+      "chief-executive-officer",
+      "chief-financial-officer",
+      "product-manager",
+      "product-feedback-synthesizer",
+      "support-analytics-reporter",
+      "product-sprint-prioritizer"
+    ]
   }
 ]

@@ -99,6 +99,9 @@ def collect_agents() -> list[dict[str, str]]:
                 "body": body,
             }
         )
+    if ROSTER.is_file():  # experts authored in this repo (e.g. extra C-suite) survive a package rebuild
+        known = {a["slug"] for a in agents}
+        agents += [a for a in json.loads(ROSTER.read_text(encoding="utf-8")) if a["slug"] not in known]
     agents.sort(key=lambda item: (item["division"], item["name"].lower()))
     slugs = [agent["slug"] for agent in agents]
     duplicates = sorted({slug for slug in slugs if slugs.count(slug) > 1})
@@ -107,43 +110,7 @@ def collect_agents() -> list[dict[str, str]]:
     return agents
 
 
-TEAMS = [
-    {
-        "id": "team-product",
-        "name": "Product Review Team",
-        "description": "Review requirements, compare options, and plan iterations across value, usability, and implementation cost.",
-        "goal": "Evaluate the value, usability, and feasibility of a product proposal.",
-        "members": ["product-manager", "design-ux-researcher", "engineering-software-architect"],
-    },
-    {
-        "id": "team-technical",
-        "name": "Technical Review Team",
-        "description": "Review architecture, security, and delivery readiness; identify risks, minimal fixes, and acceptance criteria.",
-        "goal": "Review architecture, security risks, and acceptance boundaries.",
-        "members": ["engineering-software-architect", "security-appsec-engineer", "testing-reality-checker"],
-    },
-    {
-        "id": "team-content",
-        "name": "Content Planning Team",
-        "description": "Find worthwhile content directions that fit the audience, platform, and available evidence.",
-        "goal": "Create evidence-aware topics, positioning, and content outlines.",
-        "members": ["marketing-content-creator", "marketing-growth-hacker", "research-synthesist"],
-    },
-    {
-        "id": "team-data",
-        "name": "Data Analysis Team",
-        "description": "Validate definitions and data quality before explaining results and recommending visualizations.",
-        "goal": "Produce trustworthy analysis with explicit assumptions and chart guidance.",
-        "members": ["engineering-data-engineer", "support-analytics-reporter", "engineering-data-visualization-engineer"],
-    },
-    {
-        "id": "team-research",
-        "name": "Research Team",
-        "description": "Synthesize evidence, trends, and competing options into a decision-ready recommendation.",
-        "goal": "Separate verified facts, inference, disagreement, and decision trade-offs.",
-        "members": ["research-synthesist", "product-trend-researcher", "specialized-strategy-duel-agent"],
-    },
-]
+TEAMS = json.loads((REPO / "plugins" / "agency-agents-router" / "data" / "teams.json").read_text(encoding="utf-8"))
 
 
 def install_backend(agents: list[dict[str, str]]) -> None:
@@ -357,6 +324,36 @@ function TeamCard({{ team, experts, onEdit }}) {{
   }})
 }}
 
+// Native <select multiple> hid picked members among 300+ rows and a plain click wiped the team.
+function MemberPicker({{ experts, value, onChange }}) {{
+  const [query, setQuery] = useState('')
+  const picked = new Set(value)
+  const toggle = slug => onChange(picked.has(slug) ? value.filter(item => item !== slug) : [...value, slug])
+  const needle = query.trim().toLowerCase()
+  const rows = needle ? experts.filter(expert => `${{expert.name}} ${{expert.slug}} ${{expert.division}}`.toLowerCase().includes(needle)).slice(0, 100) : []
+  return jsxs('div', {{ className: 'grid gap-2 text-sm text-(--ui-text-secondary)', children: [
+    jsx('span', {{ children: `Members (${{value.length}})` }}),
+    jsx('div', {{ className: 'flex flex-wrap gap-1.5', children: value.length ? teamMembers({{ members: value }}, experts).map(expert => jsxs('span', {{
+      className: 'inline-flex items-center gap-1.5 rounded-full border border-(--ui-stroke-secondary) py-0.5 pl-1 pr-1 text-xs text-foreground',
+      children: [
+        jsx(Avatar, {{ expert, className: 'rounded-full text-xs', style: {{ width: 20, height: 20 }} }}),
+        expert.name,
+        jsx('button', {{ type: 'button', 'aria-label': `Remove ${{expert.name}}`, className: 'rounded-full px-1 text-(--ui-text-tertiary) hover:bg-(--chrome-action-hover) hover:text-foreground', onClick: () => toggle(expert.slug), children: '×' }})
+      ]
+    }}, expert.slug)) : jsx('span', {{ className: 'text-xs text-(--ui-text-tertiary)', children: 'Pick at least one member.' }}) }}),
+    jsx(Input, {{ value: query, onChange: event => setQuery(event.target.value), placeholder: 'Search experts to add', 'aria-label': 'Search experts to add' }}),
+    rows.length ? jsx('div', {{ className: 'max-h-64 overflow-y-auto rounded-lg border border-(--ui-stroke-secondary) p-1', children: rows.map(expert => jsxs('label', {{
+      className: 'flex cursor-pointer items-center gap-2 rounded-md px-2 py-1.5 hover:bg-(--chrome-action-hover)',
+      children: [
+        jsx('input', {{ type: 'checkbox', checked: picked.has(expert.slug), onChange: () => toggle(expert.slug) }}),
+        jsx(Avatar, {{ expert, className: 'size-7 rounded-md text-xs' }}),
+        jsx('span', {{ className: 'min-w-0 flex-1 truncate text-foreground', children: expert.name }}),
+        jsx('span', {{ className: 'shrink-0 text-xs text-(--ui-text-tertiary)', children: divisionName(expert.division) }})
+      ]
+    }}, expert.slug)) }}) : needle ? jsx('div', {{ className: 'text-xs text-(--ui-text-tertiary)', children: 'No match' }}) : null
+  ] }})
+}}
+
 function CatalogEditor({{ editor, experts, onClose, onSave }}) {{
   const [draft, setDraft] = useState({{}})
   useEffect(() => {{
@@ -385,8 +382,7 @@ function CatalogEditor({{ editor, experts, onClose, onSave }}) {{
           ? jsxs('label', {{ className: 'grid gap-1 text-sm text-(--ui-text-secondary)', children: [editor.item?.builtin ? 'System prompt override (empty = original)' : 'System prompt', jsx(Textarea, {{ required: !editor.item?.builtin, rows: 12, value: draft.prompt || '', onChange: event => field('prompt', event.target.value) }})] }})
           : jsxs('div', {{ className: 'grid gap-3', children: [
               jsxs('label', {{ className: 'grid gap-1 text-sm text-(--ui-text-secondary)', children: ['Goal', jsx(Textarea, {{ rows: 3, value: draft.goal || '', onChange: event => field('goal', event.target.value) }})] }}),
-              jsxs('label', {{ className: 'grid gap-1 text-sm text-(--ui-text-secondary)', children: ['Members', jsx('select', {{ className: 'h-52 rounded-lg border border-(--ui-stroke-secondary) bg-background p-2 text-sm text-foreground', multiple: true, required: true, value: draft.members || [], onChange: event => field('members', Array.from(event.target.selectedOptions, option => option.value)), children: experts.map(expert => jsx('option', {{ value: expert.slug, children: `${{expert.name}} · ${{expert.slug}}` }}, expert.slug)) }})] }}),
-              draft.members?.length ? jsx(AvatarStack, {{ members: teamMembers(draft, experts) }}) : null
+              jsx(MemberPicker, {{ experts, value: draft.members || [], onChange: value => field('members', value) }})
             ] }}),
         jsxs(DialogFooter, {{ children: [
           jsx(Button, {{ type: 'button', variant: 'ghost', onClick: onClose, children: 'Cancel' }}),

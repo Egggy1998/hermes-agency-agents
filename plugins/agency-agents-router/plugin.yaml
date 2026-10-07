@@ -1,6 +1,6 @@
 name: agency-agents-router
 version: 1.0.8
-description: Lazy Hermes router for the 321-expert DSH Agency Agents roster.
+description: Lazy Hermes router for the 324-expert DSH Agency Agents roster.
 provides_tools:
   - agency_agents_search
   - agency_agents_inspect
