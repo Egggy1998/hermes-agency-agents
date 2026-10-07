@@ -1,0 +1,57 @@
+[
+  {
+    "id": "team-product",
+    "name": "Product Review Team",
+    "description": "Review requirements, compare options, and plan iterations across value, usability, and implementation cost.",
+    "goal": "Evaluate the value, usability, and feasibility of a product proposal.",
+    "members": [
+      "product-manager",
+      "design-ux-researcher",
+      "engineering-software-architect"
+    ]
+  },
+  {
+    "id": "team-technical",
+    "name": "Technical Review Team",
+    "description": "Review architecture, security, and delivery readiness; identify risks, minimal fixes, and acceptance criteria.",
+    "goal": "Review architecture, security risks, and acceptance boundaries.",
+    "members": [
+      "engineering-software-architect",
+      "security-appsec-engineer",
+      "testing-reality-checker"
+    ]
+  },
+  {
+    "id": "team-content",
+    "name": "Content Planning Team",
+    "description": "Find worthwhile content directions that fit the audience, platform, and available evidence.",
+    "goal": "Create evidence-aware topics, positioning, and content outlines.",
+    "members": [
+      "marketing-content-creator",
+      "marketing-growth-hacker",
+      "research-synthesist"
+    ]
+  },
+  {
+    "id": "team-data",
+    "name": "Data Analysis Team",
+    "description": "Validate definitions and data quality before explaining results and recommending visualizations.",
+    "goal": "Produce trustworthy analysis with explicit assumptions and chart guidance.",
+    "members": [
+      "engineering-data-engineer",
+      "support-analytics-reporter",
+      "engineering-data-visualization-engineer"
+    ]
+  },
+  {
+    "id": "team-research",
+    "name": "Research Team",
+    "description": "Synthesize evidence, trends, and competing options into a decision-ready recommendation.",
+    "goal": "Separate verified facts, inference, disagreement, and decision trade-offs.",
+    "members": [
+      "research-synthesist",
+      "product-trend-researcher",
+      "specialized-strategy-duel-agent"
+    ]
+  }
+]
