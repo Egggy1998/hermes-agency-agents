@@ -15,6 +15,7 @@ OUT = Path(sys.argv[1]) if len(sys.argv) > 1 else Path(__file__).resolve().paren
 DSH_PACKAGE = Path(os.environ.get("DSH_AGENCY_PACKAGE", Path.home() / ".dsh/profiles/desktop/node_modules/@michengai/dsh-agency-agents"))
 SOURCE = DSH_PACKAGE / "assets" / "agency-agents"
 REPO = Path(__file__).resolve().parents[1]
+ROSTER = REPO / "plugins" / "agency-agents-router" / "data" / "agents.json"
 # Upstream msitarzewski/agency-agents Hermes skeleton; the repo's own backend copy is the fallback.
 SKELETON = next(p for p in (Path(os.environ.get("AGENCY_HERMES_SKELETON", REPO / "missing")), REPO / "plugins" / "agency-agents-router") if (p / "__init__.py").is_file())
 BACKEND = OUT / "plugins" / "agency-agents-router"
@@ -71,6 +72,9 @@ def parse_frontmatter(text: str) -> tuple[dict[str, str], str] | None:
 
 
 def collect_agents() -> list[dict[str, str]]:
+    if not SOURCE.is_dir():
+        # No DSH package installed: the committed roster already carries every field + full persona body.
+        return json.loads(ROSTER.read_text(encoding="utf-8"))
     agents: list[dict[str, str]] = []
     for path in sorted(SOURCE.rglob("*.md")):
         parsed = parse_frontmatter(path.read_text(encoding="utf-8"))
@@ -163,7 +167,7 @@ def install_backend(agents: list[dict[str, str]]) -> None:
     (BACKEND / "plugin.yaml").write_text(
         "name: agency-agents-router\n"
         "version: 1.0.8\n"
-        "description: Lazy Hermes router for the 321-expert DSH Agency Agents roster.\n"
+        f"description: Lazy Hermes router for the {len(agents)}-expert DSH Agency Agents roster.\n"
         "provides_tools:\n"
         "  - agency_agents_search\n"
         "  - agency_agents_inspect\n"
@@ -177,7 +181,7 @@ def install_backend(agents: list[dict[str, str]]) -> None:
         f"- Experts: {len(agents)}\n"
         f"- Divisions: {len({a['division'] for a in agents})}\n"
         "- Tools: search, inspect, load, delegate\n"
-        "- Runtime strategy: lazy on-disk roster; no 321-skill prompt inflation\n\n"
+        f"- Runtime strategy: lazy on-disk roster; no {len(agents)}-skill prompt inflation\n\n"
         "Restart Hermes after installation so tool discovery reloads the plugin.\n",
         encoding="utf-8",
     )
@@ -287,7 +291,19 @@ function AvatarStack({{ members, className = '' }}) {{
   ] }})
 }}
 
+// Instructions that call the backend fail silently when its toolset is off. This sees config state only:
+// a chat opened before the plugin was enabled still lacks the tools (sessions snapshot toolsets), hence the hint.
+const TOOLS_OFF = 'Agency tools are off: run `hermes plugins enable agency-agents-router`, restart Hermes, then open a new chat.'
+const warnIfToolsOff = async text => {{
+  if (!/agency_agents_|agency-agents-router/.test(text)) return
+  try {{
+    const toolset = (await host.toolsets.list()).find(item => item.name === 'agency_agents')
+    if (!toolset?.enabled) host.notify({{ kind: 'warning', message: TOOLS_OFF }})
+  }} catch {{}}  // backend unreachable: nothing reliable to report
+}}
+
 function seatPrompt(text) {{
+  warnIfToolsOff(text)
   const sessionId = host.state.activeSessionId.get()
   host.navigate(sessionId ? `/session/${{sessionId}}` : '/')
   const target = sessionId || 'new'
@@ -402,6 +418,7 @@ function ExpertPicker() {{
       host.notify({{ kind: 'warning', message: 'Focus a chat composer, then choose again.' }})
       return
     }}
+    warnIfToolsOff(instruction)
     setOpen(false)
     setQuery('')
     host.composer.focus(null)
@@ -557,13 +574,12 @@ def install_desktop(agents: list[dict[str, str]]) -> None:
 
 def main() -> None:
     agents = collect_agents()
-    package = json.loads((DSH_PACKAGE / "package.json").read_text(encoding="utf-8"))
-    if package.get("version") != "1.0.8":
-        raise SystemExit(f"Expected DSH plugin 1.0.8, found {package.get('version')}")
+    manifest = DSH_PACKAGE / "package.json"
+    source = f"dsh {json.loads(manifest.read_text(encoding='utf-8')).get('version')}" if SOURCE.is_dir() else "committed roster"
     install_backend(agents)
     install_desktop(agents)
     print(json.dumps({
-        "version": package["version"],
+        "source": source,
         "experts": len(agents),
         "divisions": len({agent['division'] for agent in agents}),
         "teams": len(TEAMS),

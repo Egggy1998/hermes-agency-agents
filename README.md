@@ -135,7 +135,7 @@ hermes plugins enable agency-agents-router
 
 Then:
 
-1. **Restart Hermes** so the backend tools are registered.
+1. **Restart Hermes and open a new chat** so the backend tools are registered. A chat that was already open before you enabled the plugin will not get the tools.
 2. The desktop plugin **hot-loads** within a few seconds. If you do not see it, reload the app window (Ctrl+R / Cmd+R).
 3. *Agency Agents* now appears in the sidebar, and an Agency button appears in the chat composer.
 
@@ -294,7 +294,7 @@ python scripts/build.py "$HERMES_HOME"   # regenerate and install into Hermes
 
 | Input | Default | Override |
 |---|---|---|
-| DSH Agency Agents package (persona Markdown) | `~/.dsh/profiles/desktop/node_modules/@michengai/dsh-agency-agents` | env `DSH_AGENCY_PACKAGE` |
+| DSH Agency Agents package (persona Markdown), optional | `~/.dsh/profiles/desktop/node_modules/@michengai/dsh-agency-agents`. If it is not installed, the build uses the committed `data/agents.json`, so a fresh clone builds with no extra setup. | env `DSH_AGENCY_PACKAGE` |
 | Backend skeleton (from `msitarzewski/agency-agents` → `integrations/hermes`) | this repo's `plugins/agency-agents-router` | env `AGENCY_HERMES_SKELETON` |
 
 What `build.py` does:
@@ -322,8 +322,8 @@ node desktop-plugins/agency-agents/check-catalog.mjs
 node --check desktop-plugins/agency-agents/plugin.js
 ```
 
-- `check.py` confirms the expert count, that slugs are unique, that every team member exists, that every avatar file is a valid SVG **and** is embedded in `plugin.js`, and that the backend registers all four tools.
-- `check-catalog.mjs` tests the custom-catalog logic: slug generation, rejection of malformed storage, persistence, how overrides are merged, and the expert and team instructions (including the inline prompts for custom experts).
+- `check.py` confirms that the roster is non-empty, that slugs are unique, that every expert has a persona body, that every team member exists, that every avatar file is a valid SVG **and** is embedded in `plugin.js`, and that the backend registers all four tools.
+- `check-catalog.mjs` tests the custom-catalog logic: slug generation, rejection of malformed storage, persistence, how overrides are merged, the expert and team instructions (including the inline prompts for custom experts), and the "tools are off" warning.
 
 ---
 
@@ -355,7 +355,8 @@ hermes-agency-agents/
 | Symptom | Fix |
 |---|---|
 | The Agency button or sidebar entry does not appear | Reload the window with Ctrl+R. Look in `HERMES_HOME/logs/desktop.log` for `Plugin "agency-agents" failed to load`. |
-| The model says the `agency_agents_*` tools do not exist | Run `hermes plugins enable agency-agents-router`, then restart Hermes. |
+| A toast says "Agency tools are off" | The `agency_agents` toolset is disabled. Run `hermes plugins enable agency-agents-router`, restart Hermes, then open a new chat. |
+| The model says the `agency_agents_*` tools do not exist, but no toast appeared | The chat was opened before the plugin was enabled. Hermes fixes a session's tools when the session starts, so **open a new chat**. |
 | "Focus a chat composer, then choose again." | Click into the chat input box, then pick the expert or team again. |
 | A custom expert has no avatar | You are offline (custom avatars come from the DiceBear API). The emoji fallback is shown. |
 | Saving shows "must create a unique slug/id" | Another expert or team already produces that slug. Rename yours. |

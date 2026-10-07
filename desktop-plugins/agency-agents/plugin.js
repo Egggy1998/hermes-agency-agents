@@ -87,7 +87,19 @@ function AvatarStack({ members, className = '' }) {
   ] })
 }
 
+// Instructions that call the backend fail silently when its toolset is off. This sees config state only:
+// a chat opened before the plugin was enabled still lacks the tools (sessions snapshot toolsets), hence the hint.
+const TOOLS_OFF = 'Agency tools are off: run `hermes plugins enable agency-agents-router`, restart Hermes, then open a new chat.'
+const warnIfToolsOff = async text => {
+  if (!/agency_agents_|agency-agents-router/.test(text)) return
+  try {
+    const toolset = (await host.toolsets.list()).find(item => item.name === 'agency_agents')
+    if (!toolset?.enabled) host.notify({ kind: 'warning', message: TOOLS_OFF })
+  } catch {}  // backend unreachable: nothing reliable to report
+}
+
 function seatPrompt(text) {
+  warnIfToolsOff(text)
   const sessionId = host.state.activeSessionId.get()
   host.navigate(sessionId ? `/session/${sessionId}` : '/')
   const target = sessionId || 'new'
@@ -202,6 +214,7 @@ function ExpertPicker() {
       host.notify({ kind: 'warning', message: 'Focus a chat composer, then choose again.' })
       return
     }
+    warnIfToolsOff(instruction)
     setOpen(false)
     setQuery('')
     host.composer.focus(null)

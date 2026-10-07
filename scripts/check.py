@@ -11,7 +11,8 @@ PLUGIN_JS = (REPO / "desktop-plugins" / "agency-agents" / "plugin.js").read_text
 agents = json.loads((BACKEND / "data" / "agents.json").read_text(encoding="utf-8"))
 teams = json.loads((BACKEND / "data" / "teams.json").read_text(encoding="utf-8"))
 slugs = {a["slug"] for a in agents}
-assert len(agents) == len(slugs) == 321, len(agents)
+assert agents and len(agents) == len(slugs), f"{len(agents)} experts, {len(slugs)} unique slugs"
+assert all(a.get("name") and a.get("body") for a in agents), "expert missing name or persona body"
 assert all(m in slugs for t in teams for m in t["members"]), "team member missing"
 
 for slug in slugs:

@@ -135,7 +135,7 @@ hermes plugins enable agency-agents-router
 
 Sau đó:
 
-1. **Khởi động lại Hermes** để đăng ký các tool backend.
+1. **Khởi động lại Hermes và mở chat mới** để đăng ký các tool backend. Chat đã mở từ trước khi bật plugin sẽ không có tool.
 2. Plugin desktop **tự nạp lại (hot-load)** sau vài giây. Nếu chưa thấy, tải lại cửa sổ bằng Ctrl+R / Cmd+R.
 3. Mục *Agency Agents* sẽ xuất hiện ở sidebar, và nút Agency sẽ xuất hiện trong ô chat.
 
@@ -294,7 +294,7 @@ python scripts/build.py "$HERMES_HOME"   # sinh lại và cài thẳng vào Herm
 
 | Nguồn vào | Mặc định | Đổi bằng |
 |---|---|---|
-| Package DSH Agency Agents (file Markdown của persona) | `~/.dsh/profiles/desktop/node_modules/@michengai/dsh-agency-agents` | biến môi trường `DSH_AGENCY_PACKAGE` |
+| Package DSH Agency Agents (file Markdown của persona), không bắt buộc | `~/.dsh/profiles/desktop/node_modules/@michengai/dsh-agency-agents`. Nếu máy chưa cài, build sẽ dùng file `data/agents.json` có sẵn trong repo, nên clone về là build được ngay. | biến môi trường `DSH_AGENCY_PACKAGE` |
 | Khung backend (từ `msitarzewski/agency-agents` → `integrations/hermes`) | thư mục `plugins/agency-agents-router` của repo này | biến môi trường `AGENCY_HERMES_SKELETON` |
 
 `build.py` làm các bước sau:
@@ -322,8 +322,8 @@ node desktop-plugins/agency-agents/check-catalog.mjs
 node --check desktop-plugins/agency-agents/plugin.js
 ```
 
-- `check.py` kiểm tra số lượng expert, slug không trùng, mọi thành viên team đều tồn tại, mỗi file avatar là SVG hợp lệ **và** đã được nhúng vào `plugin.js`, và backend đăng ký đủ bốn tool.
-- `check-catalog.mjs` kiểm tra phần expert/team tự tạo: sinh slug, loại bỏ dữ liệu storage sai định dạng, lưu dữ liệu, ghép bản ghi đè, và nội dung chỉ dẫn cho expert lẫn team (kể cả prompt kèm theo của expert tự tạo).
+- `check.py` kiểm tra danh sách expert không rỗng, slug không trùng, expert nào cũng có nội dung persona, mọi thành viên team đều tồn tại, mỗi file avatar là SVG hợp lệ **và** đã được nhúng vào `plugin.js`, và backend đăng ký đủ bốn tool.
+- `check-catalog.mjs` kiểm tra phần expert/team tự tạo: sinh slug, loại bỏ dữ liệu storage sai định dạng, lưu dữ liệu, ghép bản ghi đè, nội dung chỉ dẫn cho expert lẫn team (kể cả prompt kèm theo của expert tự tạo), và cảnh báo khi tool đang tắt.
 
 ---
 
@@ -355,7 +355,8 @@ hermes-agency-agents/
 | Hiện tượng | Cách xử lý |
 |---|---|
 | Không thấy nút Agency hoặc mục ở sidebar | Tải lại cửa sổ bằng Ctrl+R. Tìm dòng `Plugin "agency-agents" failed to load` trong `HERMES_HOME/logs/desktop.log`. |
-| Model báo không có tool `agency_agents_*` | Chạy `hermes plugins enable agency-agents-router`, rồi khởi động lại Hermes. |
+| Hiện thông báo "Agency tools are off" | Toolset `agency_agents` đang tắt. Chạy `hermes plugins enable agency-agents-router`, khởi động lại Hermes, rồi mở chat mới. |
+| Model báo không có tool `agency_agents_*` nhưng không có thông báo nào | Chat này được mở trước khi bật plugin. Hermes chốt danh sách tool của một chat ngay lúc mở, nên hãy **mở chat mới**. |
 | Hiện thông báo "Focus a chat composer, then choose again." | Bấm vào ô nhập chat, rồi chọn lại expert hoặc team. |
 | Expert tự tạo không có avatar | Máy đang offline (avatar của expert tự tạo lấy từ DiceBear API). Lúc này emoji sẽ hiện thay. |
 | Khi lưu báo "must create a unique slug/id" | Đã có expert hoặc team khác sinh ra cùng slug. Đổi tên khác. |

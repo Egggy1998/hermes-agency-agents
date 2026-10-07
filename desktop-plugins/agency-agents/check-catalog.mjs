@@ -40,4 +40,15 @@ assert.match(api.teamInstruction(teams[0], experts), /^Use agency-agents-router/
 assert.match(api.teamInstruction({ name: 'T', goal: 'Ship it.', members: ['ceo'] }, experts), /goal: Ship it\. Task/)
 assert.match(api.teamInstruction(teams[1], experts), /## VN SEO\nDo SEO/)
 assert.deepEqual(api.teamMembers({ members: ['vn-seo', 'gone'] }, experts).map(e => e.name), ['VN SEO', 'gone'])
+
+// warnIfToolsOff: warns only for backend-dependent instructions when the toolset is disabled.
+const notices = []
+const fakeHost = enabled => ({ toolsets: { list: async () => enabled === null ? Promise.reject(new Error('down')) : [{ name: 'agency_agents', enabled }] }, notify: n => notices.push(n.message) })
+const warnFor = h => new Function('host', pick('const TOOLS_OFF', 'function seatPrompt') + 'return warnIfToolsOff')(h)
+await warnFor(fakeHost(false))('Use agency_agents_load with slug "ceo"')
+await warnFor(fakeHost(true))('Use agency_agents_load with slug "ceo"')
+await warnFor(fakeHost(false))('Act as VN SEO. Follow this specialist prompt')
+await warnFor(fakeHost(null))('Use agency-agents-router for this task.')
+assert.equal(notices.length, 1)
+assert.match(notices[0], /hermes plugins enable agency-agents-router/)
 console.log('catalog check: ok')
