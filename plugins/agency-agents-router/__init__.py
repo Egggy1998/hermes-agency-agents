@@ -120,6 +120,20 @@ def _lifecycle_context(agent: dict[str, Any]) -> str:
     return context[:keep] + _TRUNCATION_MARKER
 
 
+def _delegation_model() -> str | None:
+    """`delegation.model` from config.yaml, so specialists don't silently inherit the chat model.
+
+    ponytail: passes the model only; provider comes from the parent unless Hermes core
+    resolves `delegation.provider` in subagent_lifecycle.launch(). Cross-provider pins need that.
+    """
+    try:
+        from hermes_cli.config import load_config_readonly
+
+        return str((load_config_readonly().get("delegation") or {}).get("model") or "").strip() or None
+    except Exception:
+        return None
+
+
 def _json(payload: dict[str, Any]) -> str:
     return json.dumps(payload, ensure_ascii=False, indent=2)
 
@@ -268,6 +282,7 @@ def register(ctx):
             handle = lifecycle.launch(SubagentLaunchRequest(
                 goal=task,
                 context=_lifecycle_context(agent),
+                model=_delegation_model(),
             ))
             terminal = lifecycle.wait(
                 handle, timeout_seconds=_DELEGATION_WAIT_SECONDS
